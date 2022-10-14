@@ -2,9 +2,11 @@ import { Box, Grid, GridItem, HStack, Img } from '@chakra-ui/react';
 
 const Card = () => {
     return (
-        <Grid bg={'gray.500'} rounded={'lg'} p={'2'}>
+        <Grid bg={'orange.500'} rounded={'lg'} p={'2'}>
             <HStack justifySelf={'center'}>
-                <Box fontSize={'2rem'}>13/10/2022</Box>
+                <Box fontSize={'2rem'}>
+                    13/10/2022
+                </Box>
                 <Img src='icons/01d.png' />
             </HStack>
             <HStack justifySelf={'center'}>

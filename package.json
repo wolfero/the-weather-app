@@ -22,7 +22,7 @@
     "react-icons": "^3.11.0",
     "react-redux": "^8.0.4",
     "react-scripts": "5.0.1",
-    "react-slick": "^0.29.0",
+    "react-spring-3d-carousel": "^1.2.1",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -48,7 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.10",
     "msw": "^0.47.4"
   }
 }

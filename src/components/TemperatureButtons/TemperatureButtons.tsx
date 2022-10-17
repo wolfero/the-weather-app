@@ -1,14 +1,27 @@
+import { FormEvent } from 'react';
 import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
+import { useAppDispatch } from '../../store/store';
+import { switchUnitsTemperature } from '../../store/slices/days';
 
 const TemperatureButtons = () => {
-    return (
-        <RadioGroup defaultValue='Celsius' justifySelf={'center'}>
-            <Stack spacing={5} direction='row' >
-                <Radio value='Celsius'>Celsius</Radio>
-                <Radio value='Fahrenheit'>Fahrenheit</Radio>
-            </Stack>
-        </RadioGroup>
-    );
+	const dispatch = useAppDispatch();
+	const handleChange = (event: FormEvent<HTMLInputElement>) => {
+		const units = event.currentTarget.value;
+		dispatch(switchUnitsTemperature(units));
+	};
+
+	return (
+		<RadioGroup defaultValue="Celsius" justifySelf={'center'}>
+			<Stack spacing={5} direction="row">
+				<Radio value="Celsius" onChange={handleChange}>
+					Celsius
+				</Radio>
+				<Radio value="Fahrenheit" onChange={handleChange}>
+					Fahrenheit
+				</Radio>
+			</Stack>
+		</RadioGroup>
+	);
 };
 
 export default TemperatureButtons;

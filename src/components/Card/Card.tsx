@@ -10,7 +10,7 @@ const Card = ({ day }: { day: Day }) => {
 			<VStack justifySelf={'center'}>
 				<Box fontSize={'2rem'}>{date}</Box>
 				<Img src={iconUrl} />
-				<Box fontSize={'2rem'}>{day.main.temp}ºC</Box>
+				<Box fontSize={'2rem'}>{day.main.temp}º</Box>
 			</VStack>
 			<HStack mt={4} justifySelf={'center'}>
 				<Grid
@@ -20,20 +20,20 @@ const Card = ({ day }: { day: Day }) => {
                         "description_3 value_3"
                         "description_4 value_4"`}
 					gridTemplateRows={'max-content'}
-					gridTemplateColumns={'7rem'}
+					gridTemplateColumns={'6rem'}
 					fontSize={'1rem'}
 				>
 					<GridItem area={'description_1'} textAlign={'left'}>
 						Feels like:
 					</GridItem>
 					<GridItem area={'value_1'} textAlign={'right'}>
-						{day.main.feels_like} ºC
+						{day.main.feels_like}º
 					</GridItem>
 					<GridItem area={'description_2'} textAlign={'left'}>
 						Wind:
 					</GridItem>
 					<GridItem area={'value_2'} textAlign={'right'}>
-						{day.wind.speed}m/s
+						{day.wind.speed} m/s
 					</GridItem>
 					<GridItem area={'description_3'} textAlign={'left'}>
 						Humidity:
@@ -45,7 +45,7 @@ const Card = ({ day }: { day: Day }) => {
 						Pressure:
 					</GridItem>
 					<GridItem area={'value_4'} textAlign={'right'}>
-						{day.main.pressure}
+						{day.main.pressure} hPa
 					</GridItem>
 				</Grid>
 			</HStack>

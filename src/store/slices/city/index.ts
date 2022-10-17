@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const useCitySlice = createSlice({
 	name: 'city',
 	initialState: {
-		cod: 0,
+		cod: 200,
 		message: '',
 		cityName: 'tunisia',
 	},

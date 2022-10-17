@@ -4,13 +4,15 @@ import { Day } from '../../store/types';
 const Card = ({ day }: { day: Day }) => {
 	const iconUrl = `icons/${day.weather[0].icon}.png`;
 	const date = new Date(day.dt * 1000).toLocaleDateString();
+	const temperature = Math.round(day.main.temp);
+	const feelsLike = Math.round(day.main.feels_like);
 
 	return (
 		<Grid bg={'purple.500'} rounded={'md'} p={5}>
 			<VStack justifySelf={'center'}>
 				<Box fontSize={'2rem'}>{date}</Box>
 				<Img src={iconUrl} />
-				<Box fontSize={'2rem'}>{day.main.temp}º</Box>
+				<Box fontSize={'2rem'}>{temperature}º</Box>
 			</VStack>
 			<HStack mt={4} justifySelf={'center'}>
 				<Grid
@@ -27,7 +29,7 @@ const Card = ({ day }: { day: Day }) => {
 						Feels like:
 					</GridItem>
 					<GridItem area={'value_1'} textAlign={'right'}>
-						{day.main.feels_like}º
+						{feelsLike}º
 					</GridItem>
 					<GridItem area={'description_2'} textAlign={'left'}>
 						Wind:

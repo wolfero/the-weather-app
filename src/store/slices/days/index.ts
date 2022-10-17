@@ -10,9 +10,19 @@ export const useDaysSlice = createSlice({
 		setListDays: (state, action) => {
 			state.listDays = action.payload;
 		},
+		switchUnitsTemperature: (state, action) => {
+			for (const day of state.listDays) {
+				if (action.payload === 'Celsius') {
+					day.main.temp -= 32;
+					day.main.feels_like -= 32;
+				} else {
+					day.main.temp += 32;
+					day.main.feels_like += 32;
+				}
+			}
+		},
 	},
 });
 
-export const { setListDays } = useDaysSlice.actions;
-
+export const { setListDays, switchUnitsTemperature } = useDaysSlice.actions;
 export default useDaysSlice.reducer;

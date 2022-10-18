@@ -40,7 +40,7 @@ const SearchBar = () => {
 	// ? maybe create onchange handler to load default weather data when search bar is empty
 
 	return (
-		<Container mt={4}>
+		<Container mt={8}>
 			<Input
 				pr="4.5rem"
 				type="text"

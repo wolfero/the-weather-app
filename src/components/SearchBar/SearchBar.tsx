@@ -2,11 +2,7 @@ import { Container, Input } from '@chakra-ui/react';
 import { AxiosError } from 'axios';
 import { KeyboardEvent } from 'react';
 import { getWeatherData } from '../../services/weatherService/weatherServices';
-import {
-	setCityName,
-	setCod,
-	setMessage,
-} from '../../store/slices/weatherData';
+import { setCityName, setCod, setMessage } from '../../store/slices/weatherData';
 import { setListDays, toggleTemperatureUnits } from '../../store/slices/days';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
@@ -17,6 +13,7 @@ const SearchBar = () => {
 		if (event.key === 'Enter') {
 			const cityName = event.currentTarget.value.toLowerCase();
 			if (cityName !== '') {
+				event.currentTarget.value = '';
 				try {
 					const listDays = await getWeatherData(cityName);
 					dispatch(setCityName(cityName));

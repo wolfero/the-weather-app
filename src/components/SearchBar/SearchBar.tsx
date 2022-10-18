@@ -7,7 +7,7 @@ import {
 	setCod,
 	setMessage,
 } from '../../store/slices/weatherData';
-import { setListDays, switchTemperatureUnits } from '../../store/slices/days';
+import { setListDays, toggleTemperatureUnits } from '../../store/slices/days';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
 const SearchBar = () => {
@@ -23,7 +23,7 @@ const SearchBar = () => {
 					dispatch(setListDays(listDays));
 
 					if (temperatureUnits === 'Fahrenheit') {
-						dispatch(switchTemperatureUnits(temperatureUnits));
+						dispatch(toggleTemperatureUnits(temperatureUnits));
 					}
 					dispatch(setCod(200));
 				} catch (error) {

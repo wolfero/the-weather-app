@@ -1,4 +1,4 @@
-import useDaysSlice, { switchUnitsTemperature } from '.';
+import useDaysSlice, { toggleTemperatureUnits } from '.';
 import { weatherDataMok } from '../../../mocks/weatherDataMok';
 
 describe('Slices day', () => {
@@ -7,7 +7,7 @@ describe('Slices day', () => {
 	};
 
 	it('should be change temperature units', () => {
-		const switchUnits = switchUnitsTemperature('Fahrenheit');
+		const switchUnits = toggleTemperatureUnits('Fahrenheit');
 		const newState = useDaysSlice(initialState, switchUnits);
 
 		const oldTemp = weatherDataMok.list[0].main.temp;

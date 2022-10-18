@@ -6,6 +6,7 @@ export const useCitySlice = createSlice({
 		cod: 200,
 		message: '',
 		cityName: 'tunisia',
+		temperatureUnits: 'Celsius',
 	},
 	reducers: {
 		setCod: (state, action) => {
@@ -17,9 +18,14 @@ export const useCitySlice = createSlice({
 		setCityName: (state, action) => {
 			state.cityName = action.payload;
 		},
+		setTemperatureUnits: (state, action) => {
+			state.temperatureUnits = action.payload;
+		},
+		
 	},
 });
 
-export const { setCod, setMessage, setCityName } = useCitySlice.actions;
+export const { setCod, setMessage, setCityName, setTemperatureUnits } =
+	useCitySlice.actions;
 
 export default useCitySlice.reducer;

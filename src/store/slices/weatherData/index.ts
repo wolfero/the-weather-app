@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const useCitySlice = createSlice({
+export const useWeatherDataSlice = createSlice({
 	name: 'city',
 	initialState: {
 		cod: 200,
@@ -21,11 +21,15 @@ export const useCitySlice = createSlice({
 		setTemperatureUnits: (state, action) => {
 			state.temperatureUnits = action.payload;
 		},
-		
+		resetWeatherDataStates: (state) => {
+			state.cod = 200;
+			state.message = '';
+			state.cityName = 'tunisia';
+		},
 	},
 });
 
-export const { setCod, setMessage, setCityName, setTemperatureUnits } =
-	useCitySlice.actions;
+export const { setCod, setMessage, setCityName, setTemperatureUnits, resetWeatherDataStates } =
+	useWeatherDataSlice.actions;
 
-export default useCitySlice.reducer;
+export default useWeatherDataSlice.reducer;

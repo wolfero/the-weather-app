@@ -14,19 +14,19 @@ const updateTemperature = (day: Day, temperatureUnit: string) => {
 export const useDaysSlice = createSlice({
 	name: 'days',
 	initialState: {
-		listDays: <Day[]>[],
+		list: [] as Day[],
 	},
 	reducers: {
-		setListDays: (state, action) => {
-			state.listDays = action.payload;
+		setList: (state, action) => {
+			state.list = action.payload;
 		},
 		toggleTemperatureUnits: (state, action) => {
-			for (const day of state.listDays) {
+			for (const day of state.list) {
 				updateTemperature(day, action.payload);
 			}
 		},
 	},
 });
 
-export const { setListDays, toggleTemperatureUnits } = useDaysSlice.actions;
+export const { setList, toggleTemperatureUnits } = useDaysSlice.actions;
 export default useDaysSlice.reducer;

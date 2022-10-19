@@ -3,7 +3,7 @@ import { weatherDataMok } from '../../../mocks/weatherDataMok';
 
 describe('Slices day', () => {
 	const initialState = {
-		listDays: weatherDataMok.list,
+		list: weatherDataMok.list,
 	};
 
 	it('should be change temperature units', () => {
@@ -13,6 +13,6 @@ describe('Slices day', () => {
 		const oldTemp = weatherDataMok.list[0].main.temp;
 		const unitsFahrenheit = oldTemp + 32;
 
-		expect(newState.listDays[0].main.temp).toEqual(unitsFahrenheit);
+		expect(newState.list[0].main.temp).toEqual(unitsFahrenheit);
 	});
 });

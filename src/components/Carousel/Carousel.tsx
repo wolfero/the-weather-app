@@ -12,7 +12,7 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { setListDays, toggleTemperatureUnits } from '../../store/slices/days';
+import { setList, toggleTemperatureUnits } from '../../store/slices/days';
 import { getWeatherData } from '../../services/weatherService/weatherServices';
 import { Card } from '../Card';
 
@@ -21,17 +21,14 @@ import 'swiper/swiper-bundle.css';
 
 const Carousel = () => {
 	const dispatch = useAppDispatch();
-	const { cod, message, cityName, temperatureUnits } = useAppSelector(
-		(state) => state.weatherData
-	);
-	const listDays = useAppSelector((state) => state.days.listDays);
+	const { weatherData, days } = useAppSelector((state) => state);
 
 	// TODO CUSTOM HOOK
 	const LoadListDays = async () => {
 		const weatherListDays = await getWeatherData();
-		dispatch(setListDays(weatherListDays));
-		if (temperatureUnits === 'Fahrenheit') {
-			dispatch(toggleTemperatureUnits(temperatureUnits));
+		dispatch(setList(weatherListDays));
+		if (weatherData.temperatureUnits === 'Fahrenheit') {
+			dispatch(toggleTemperatureUnits(weatherData.temperatureUnits));
 		}
 	};
 
@@ -41,11 +38,11 @@ const Carousel = () => {
 
 	return (
 		<>
-			{cod === 200 ? (
-				listDays.length > 0 ? (
+			{weatherData.cod === 200 ? (
+				days.list.length > 0 ? (
 					<Box marginTop={8}>
-						<Heading textTransform={'capitalize'}>{cityName}</Heading>
-						<Container marginTop={4} >
+						<Heading textTransform={'capitalize'}>{weatherData.cityName}</Heading>
+						<Container marginTop={4}>
 							<Swiper
 								slidesPerView={3}
 								slidesPerGroup={1}
@@ -57,7 +54,7 @@ const Carousel = () => {
 								navigation={true}
 								modules={[Navigation]}
 							>
-								{listDays.map((day, index) => (
+								{days.list.map((day, index) => (
 									<SwiperSlide key={index}>
 										<Card day={day} />
 									</SwiperSlide>
@@ -81,7 +78,7 @@ const Carousel = () => {
 				>
 					<AlertIcon boxSize="40px" mr={0} />
 					<AlertTitle mt={4} mb={1} fontSize="lg" textTransform={'uppercase'}>
-						{message}
+						{weatherData.message}
 					</AlertTitle>
 				</Alert>
 			)}

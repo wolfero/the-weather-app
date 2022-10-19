@@ -1,19 +1,24 @@
 import { Container, Input } from '@chakra-ui/react';
 import { AxiosError } from 'axios';
-import { KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 import { getWeatherData } from '../../services/weatherService/weatherServices';
-import { setCityName, setCod, setMessage } from '../../store/slices/weatherData';
+import {
+	resetWeatherDataStates,
+	setCityName,
+	setCod,
+	setMessage,
+} from '../../store/slices/weatherData';
 import { setListDays, toggleTemperatureUnits } from '../../store/slices/days';
 import { useAppDispatch, useAppSelector } from '../../store/store';
+import { Data } from '../../store/types';
 
 const SearchBar = () => {
 	const dispatch = useAppDispatch();
-	const temperatureUnits = useAppSelector((state) => state.weatherData.temperatureUnits);
+	const { temperatureUnits } = useAppSelector((state) => state.weatherData);
 	const handleKeypress = async (event: KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
 			const cityName = event.currentTarget.value.toLowerCase();
 			if (cityName !== '') {
-				event.currentTarget.value = '';
 				try {
 					const listDays = await getWeatherData(cityName);
 					dispatch(setCityName(cityName));
@@ -23,21 +28,24 @@ const SearchBar = () => {
 						dispatch(toggleTemperatureUnits(temperatureUnits));
 					}
 					dispatch(setCod(200));
-				} catch (error) {
+				} catch (error: any) {
 					errorHandler(error);
 				}
 			}
 		}
 	};
-	const errorHandler = (error: unknown) => {
-		if (error instanceof AxiosError) {
-			const errorData = error.response?.data;
-			dispatch(setCod(errorData.cod));
-			dispatch(setMessage(errorData.message));
-		}
+	const errorHandler = (error: AxiosError) => {
+		const errorData = error.response?.data as Data;
+		dispatch(setCod(errorData.cod));
+		dispatch(setMessage(errorData.message));
 	};
 
-	// ? maybe create onchange handler to load default weather data when search bar is empty
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const cityName = event.currentTarget.value;
+		if (cityName === '') {
+			dispatch(resetWeatherDataStates());
+		}
+	};
 
 	return (
 		<Container mt={8}>
@@ -46,6 +54,7 @@ const SearchBar = () => {
 				type="text"
 				placeholder="Search city name"
 				onKeyPress={handleKeypress}
+				onChange={handleChange}
 			/>
 		</Container>
 	);

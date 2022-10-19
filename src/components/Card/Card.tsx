@@ -8,7 +8,7 @@ const Card = ({ day }: { day: Day }) => {
 	const feelsLike = Math.round(day.main.feels_like);
 
 	return (
-		<Grid bg={'purple.500'} rounded={'md'} p={5}>
+		<Grid bgGradient={'linear(purple.600,red.500)'} rounded={'md'} py={2} >
 			<VStack justifySelf={'center'}>
 				<Box fontSize={'2rem'}>{date}</Box>
 				<Img src={iconUrl} />

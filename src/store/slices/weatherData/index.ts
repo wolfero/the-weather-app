@@ -24,7 +24,6 @@ export const useWeatherDataSlice = createSlice({
 		resetWeatherDataStates: (state) => {
 			state.cod = 200;
 			state.message = '';
-			state.cityName = 'tunisia';
 		},
 	},
 });

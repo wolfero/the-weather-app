@@ -15,7 +15,7 @@
     "react-icons": "^3.11.0",
     "react-redux": "^8.0.4",
     "react-scripts": "5.0.1",
-    "react-spring-3d-carousel": "^1.2.1",
+    "swiper": "^8.4.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -28,6 +28,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "jest": {
+		"transformIgnorePatterns": [
+			"node_modules/?!(swiper/react|ignore-me-too)"
+		]
+	},
   "browserslist": {
     "production": [
       ">0.2%",

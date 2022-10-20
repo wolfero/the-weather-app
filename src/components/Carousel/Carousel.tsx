@@ -38,49 +38,33 @@ const Carousel = () => {
 
 	return (
 		<>
-			{weatherData.cod === 200 ? (
-				days.list.length > 0 ? (
-					<Box marginTop={8}>
-						<Heading textTransform={'capitalize'}>{weatherData.cityName}</Heading>
-						<Container marginTop={4}>
-							<Swiper
-								slidesPerView={3}
-								slidesPerGroup={1}
-								spaceBetween={20}
-								loop={true}
-								loopFillGroupWithBlank={true}
-								centeredSlides={true}
-								grabCursor={true}
-								navigation={true}
-								modules={[Navigation]}
-							>
-								{days.list.map((day, index) => (
-									<SwiperSlide key={index}>
-										<Card day={day} />
-									</SwiperSlide>
-								))}
-							</Swiper>
-						</Container>
-					</Box>
-				) : (
-					<Center h={'2xl'}>
-						<Spinner size="xl" />
-					</Center>
-				)
+			{days.list.length > 0 ? (
+				<Box marginTop={8}>
+					<Heading textTransform={'capitalize'}>{weatherData.cityName}</Heading>
+					<Container marginTop={4}>
+						<Swiper
+							slidesPerView={3}
+							slidesPerGroup={1}
+							spaceBetween={20}
+							loop={true}
+							loopFillGroupWithBlank={true}
+							centeredSlides={true}
+							grabCursor={true}
+							navigation={true}
+							modules={[Navigation]}
+						>
+							{days.list.map((day, index) => (
+								<SwiperSlide key={index}>
+									<Card day={day} />
+								</SwiperSlide>
+							))}
+						</Swiper>
+					</Container>
+				</Box>
 			) : (
-				<Alert
-					status="error"
-					flexDirection="column"
-					alignItems="center"
-					justifyContent="center"
-					textAlign="center"
-					marginTop={8}
-				>
-					<AlertIcon boxSize="40px" mr={0} />
-					<AlertTitle mt={4} mb={1} fontSize="lg" textTransform={'uppercase'}>
-						{weatherData.message}
-					</AlertTitle>
-				</Alert>
+				<Center h={'2xl'}>
+					<Spinner size="xl" />
+				</Center>
 			)}
 		</>
 	);

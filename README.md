@@ -1,6 +1,7 @@
 # Content index
 
 -   [Getting Started](#getting-started)
+    -   [Pre-requisites](#pre-requisites-%EF%B8%8F)
     -   [Installation](#installation-)
     -   [Running the project](#running-the-project-)
 -   [Abstract](#abstract)
@@ -12,7 +13,10 @@
 -   [Data structures](#data-structures)
 
 # Getting Started
-
+-   ## Pre-requisites ✔️
+    It's necessary to create an .env file and add the API KEY in the following format:
+    
+    `REACT_APP_ACCESS_KEY = HERE YOUR API KEY`
 -   ## Installation 🛠
     `npm install`
 -   ## Running the project ✈

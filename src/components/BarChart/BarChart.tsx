@@ -3,6 +3,8 @@ import { Container } from '@chakra-ui/react';
 import { useAppSelector } from '../../store/store';
 import { getDays } from '../../store/slices/days/selectors';
 
+import { barChartContainer } from './BarChart.styles';
+
 const BarChart = () => {
 	const listDays = useAppSelector(getDays);
 	const days = listDays.map((day) => {
@@ -29,7 +31,7 @@ const BarChart = () => {
 	};
 
 	return (
-		<Container mt={8} bg={'white'} color={'black'} justifyContent={'center'} border={'1px'}>
+		<Container sx={barChartContainer}>
 			<Chart options={state.options} series={state.series} type="bar" />
 		</Container>
 	);

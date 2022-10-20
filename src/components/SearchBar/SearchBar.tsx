@@ -1,49 +1,47 @@
-import { Container, Input } from '@chakra-ui/react';
-import { AxiosError } from 'axios';
-import { ChangeEvent, KeyboardEvent } from 'react';
-import { getWeatherData } from '../../services/weatherService/weatherServices';
 import {
-	resetWeatherDataStates,
-	setCityName,
 	setCod,
 	setMessage,
+	setCityName,
+	resetWeatherDataStates,
 } from '../../store/slices/weatherData';
-import { setList, toggleTemperatureUnits } from '../../store/slices/days';
-import { useAppDispatch, useAppSelector } from '../../store/store';
 import { Data } from '../../store/types';
+import { ChangeEvent, KeyboardEvent } from 'react';
+import { Container, Input } from '@chakra-ui/react';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { setList, toggleTemperatureUnits } from '../../store/slices/days';
+import { getWeatherData } from '../../services/weatherService/weatherServices';
+import { getTemperatureUnits } from '../../store/slices/weatherData/selectors';
 
 const SearchBar = () => {
 	const dispatch = useAppDispatch();
-	const { temperatureUnits } = useAppSelector((state) => state.weatherData);
-	const handleKeypress = async (event: KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === 'Enter') {
-			const cityName = event.currentTarget.value.toLowerCase();
-			if (cityName !== '') {
-				try {
-					const listDays = await getWeatherData(cityName);
-					dispatch(setCityName(cityName));
-					dispatch(setList(listDays));
-
-					if (temperatureUnits === 'Fahrenheit') {
-						dispatch(toggleTemperatureUnits(temperatureUnits));
-					}
-					dispatch(setCod(200));
-				} catch (error: any) {
-					errorHandler(error);
-				}
+	const temperatureUnits = useAppSelector(getTemperatureUnits);
+	const LoadListDays = async (cityName = 'tunisia') => {
+		try {
+			const listDays = await getWeatherData(cityName);
+			dispatch(setCityName(cityName));
+			dispatch(setList(listDays));
+			if (temperatureUnits === 'Fahrenheit') {
+				dispatch(toggleTemperatureUnits(temperatureUnits));
 			}
+			dispatch(setCod(200));
+		} catch (error: any) {
+			const errorData = error.response?.data as Data;
+			dispatch(setCod(errorData.cod));
+			dispatch(setMessage(errorData.message));
 		}
 	};
-	const errorHandler = (error: AxiosError) => {
-		const errorData = error.response?.data as Data;
-		dispatch(setCod(errorData.cod));
-		dispatch(setMessage(errorData.message));
-	};
-
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const cityName = event.currentTarget.value;
 		if (cityName === '') {
 			dispatch(resetWeatherDataStates());
+		}
+	};
+	const handleKeypress = async (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			const cityName = event.currentTarget.value;
+			if (cityName !== '') {
+				LoadListDays(cityName.toLowerCase());
+			}
 		}
 	};
 

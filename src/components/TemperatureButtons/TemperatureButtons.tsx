@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
-import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { useAppDispatch } from '../../store/store';
+import { Radio, RadioGroup, Stack } from '@chakra-ui/react';
 import { toggleTemperatureUnits } from '../../store/slices/days';
 import { setTemperatureUnits } from '../../store/slices/weatherData';
 

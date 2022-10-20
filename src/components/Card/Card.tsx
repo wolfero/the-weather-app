@@ -8,7 +8,7 @@ const Card = ({ day }: { day: Day }) => {
 	const feelsLike = Math.round(day.main.feels_like);
 
 	return (
-		<Grid bgGradient={'linear(purple.600,red.500)'} rounded={'md'} py={2} >
+		<Grid bgGradient={'linear(purple.600,red.500)'} rounded={'md'} py={2}>
 			<VStack justifySelf={'center'}>
 				<Box fontSize={'2rem'}>{date}</Box>
 				<Img src={iconUrl} />
@@ -16,8 +16,7 @@ const Card = ({ day }: { day: Day }) => {
 			</VStack>
 			<HStack mt={4} justifySelf={'center'}>
 				<Grid
-					templateAreas={`"title title"
-                        "description_1 value_1"
+					templateAreas={`"description_1 value_1"
                         "description_2 value_2"
                         "description_3 value_3"
                         "description_4 value_4"`}

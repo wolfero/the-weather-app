@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { Day } from '../../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const updateTemperature = (day: Day, temperatureUnit: string) => {
 	if (temperatureUnit === 'Celsius') {

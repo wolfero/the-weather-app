@@ -1,9 +1,11 @@
 import { ChakraProvider, Box, theme, Grid, Alert, AlertIcon, AlertTitle } from '@chakra-ui/react';
 import { BarChart, Carousel, ColorModeSwitcher, SearchBar, TemperatureButtons } from './components';
+import { getCod, getMessage } from './store/slices/weatherData/selectors';
 import { useAppSelector } from './store/store';
 
 export const App = () => {
-	const weatherData = useAppSelector((state) => state.weatherData);
+	const cod = useAppSelector(getCod);
+	const message = useAppSelector(getMessage);
 	return (
 		<ChakraProvider theme={theme}>
 			<Box textAlign="center" fontSize="xl">
@@ -11,7 +13,7 @@ export const App = () => {
 					<ColorModeSwitcher justifySelf="flex-end" />
 					<TemperatureButtons />
 					<SearchBar />
-					{weatherData.cod == 200 ? (
+					{cod == 200 ? (
 						<>
 							<Carousel />
 							<BarChart />
@@ -27,7 +29,7 @@ export const App = () => {
 						>
 							<AlertIcon boxSize="40px" mr={0} />
 							<AlertTitle mt={4} mb={1} fontSize="lg" textTransform={'uppercase'}>
-								{weatherData.message}
+								{message}
 							</AlertTitle>
 						</Alert>
 					)}

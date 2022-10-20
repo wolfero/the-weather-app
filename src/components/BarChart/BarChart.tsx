@@ -1,9 +1,10 @@
 import Chart from 'react-apexcharts';
 import { Container } from '@chakra-ui/react';
 import { useAppSelector } from '../../store/store';
+import { getDays } from '../../store/slices/days/selectors';
 
 const BarChart = () => {
-	const listDays = useAppSelector((state) => state.days.list);
+	const listDays = useAppSelector(getDays);
 	const days = listDays.map((day) => {
 		return new Date(day.dt * 1000).toLocaleDateString();
 	});

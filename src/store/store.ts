@@ -1,9 +1,8 @@
+import days from './slices/days';
+import weatherData from './slices/weatherData';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import type { TypedUseSelectorHook } from 'react-redux';
-
-import weatherData from './slices/weatherData';
-import days from './slices/days';
 
 export const store = configureStore({
 	reducer: {

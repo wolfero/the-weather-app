@@ -16,7 +16,7 @@ const filterDays = (list: Day[]) => {
 	const todayDate = new Date(list[0].dt * 1000);
 	const newListDays = list.filter((day) => {
 		const nextDate = new Date(day.dt * 1000);
-		const isSameHour = todayDate.getHours() === nextDate.getHours();
+		const isSameHour = todayDate.getUTCHours() === nextDate.getUTCHours();
 		if (isSameHour) {
 			return day;
 		}
